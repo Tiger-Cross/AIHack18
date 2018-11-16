@@ -9,6 +9,6 @@ We are using the 2012-2016 detailed tables – Block Groups- California dataset,
 
 A block group is a collection of several blocks, which are small areas usually defined by some geographic entity like a road, a river or other. One block group typically has a population of around 1000 people, however this can vary quite a lot. The geographic data was unfortunately omitted when we have exported all the metadata over to.csv files. The US census questionnaire asks for sex, age, gender, annual income, civil status, education, and employment status and a couple of more questions. The US census bureau has then restructured these answers into anonymous features describing the averages of some answers and the count of people fitting certain characteristic.
 
-# TODO: insert image
+![alt text](https://raw.githubusercontent.com/Tiger-Cross/AIHack18/master/imgs/block_group_outline.png)
 
 info forked from http://aihack.org/the-hackathon/
