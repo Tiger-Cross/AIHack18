@@ -36,34 +36,3 @@ def find_educational_attainment_correlation(csv_filepath, truncation_index, educ
     return [poverty[poverty.columns[correlations.index(max(correlations))]].name, correlations]
 
 find_educational_attainment_correlation(r'C:\Users\Jonas\Desktop\AIhack\data\long_names\poverty.csv', 285, education_standard = 'bachelors')
-#%%
-N = 285
-
-edu_attainment = pd.read_csv(r'C:\Users\Jonas\Desktop\AIhack\data\long_names\edu_attainment.csv')
-poverty = pd.read_csv(r'C:\Users\Jonas\Desktop\AIhack\data\long_names\poverty.csv')
-
-no_bachelors = edu_attainment['EDUCATIONAL ATTAINMENT FOR THE POPULATION 25 YEARS AND OVER: Bachelors degree: Population 25 years and over -- (Estimate)']
-no_masters = edu_attainment['EDUCATIONAL ATTAINMENT FOR THE POPULATION 25 YEARS AND OVER: Masters degree: Population 25 years and over -- (Estimate)']
-population = edu_attainment['EDUCATIONAL ATTAINMENT FOR THE POPULATION 25 YEARS AND OVER: Total: Population 25 years and over -- (Estimate)']
-
-fractional_bachelors = no_bachelors/population
-fractional_masters = no_masters/population
-y = fractional_bachelors[0:N]
-#y = fractional_masters[0:N]
-#poverty['RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS: Total: Population for whom poverty status is determined -- (Estimate)']
-
-correlations = []
-column = poverty.columns[10]
-
-
-
-for column in poverty.columns[4:]:
-    absolute_x = poverty[column]
-    fractional_x = absolute_x[0:N]/poverty['RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS: Total: Population for whom poverty status is determined -- (Estimate)'][0:N]
-    correlations.append(np.corrcoef(fractional_x, y)[0][1])
-
-print(correlations[13])
-print(poverty[poverty.columns[correlations.index(max(correlations))]])
-
-plt.plot(fractional_x, y, 'x')
-plt.show()
