@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# don't add massive unzipped dataset
+data/raw/california
+data/raw/__MACOSX
