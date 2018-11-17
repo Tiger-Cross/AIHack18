@@ -1,5 +1,5 @@
 # AIHack18
-## Investigation California Socioeconomic Relations Dataset
+## Investigation of California Socioeconomic Relations Dataset
 
 ### Outline
 
