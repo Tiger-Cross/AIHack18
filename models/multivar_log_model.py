@@ -26,27 +26,24 @@ for index, name in enumerate(filenames):
     df = pd.read_csv(data_folder / "{}.csv".format(name))
     xs.append(df[feature_names[index]])
 
-print(xs)
-
 # Set up y values
 edu_df = pd.read_csv(data_folder / "X15_EDUCATIONAL_ATTAINMENT.csv")
 edu_y_data = edu_df["SEX BY AGE BY FIELD OF BACHELOR'S DEGREE FOR FIRST MAJOR FOR THE POPULATION 25 YEARS AND OVER: Total: POPULATION 25 YEARS AND OVER WITH A BACHELOR'S DEGREE OR HIGHER ATTAINMENT -- (Estimate)"]
 
-
 xs_df = pd.concat(xs, axis=1)
 xs_df.columns = ["Income", "Food Stamps", "Hispanic", "Health Insurance", "Household"]
 
-xs_small = xs[:]
+# Shrink and normalise x values
+for col in xs_df:
+    col = col[:]
+y_small = edu_y_data[:]
 scaler = MinMaxScaler()
-x = xs_small["Income per capita"]
-y = inc_edu_small["Total bachelor's or higher"]
-
-# Normalise x values
-norm_x = scaler.fit_transform(x.values.reshape(-1, 1))
+norm_x = scaler.fit_transform(xs_df.values.reshape(-1, 1))
 seed = 7
 test_size = 0.3
 
-x_train, x_test, y_train, y_test = train_test_split(norm_x, y,
+# Split data for training and testing
+x_train, x_test, y_train, y_test = train_test_split(norm_x, y_small,
         test_size=test_size, random_state=seed)
 
 print("training data size: {}".format(len(x_train)))
@@ -54,10 +51,9 @@ print("training data size: {}".format(len(x_train)))
 logreg = LogisticRegression(C=1e5, solver='lbfgs', multi_class='multinomial',
         n_jobs=-1)
 logreg.fit(x_train, y_train)
+joblib.dump(logreg, "multivar_log_model.dat")
 
-joblib.dump(logreg, "inc_bach_log_model.dat")
-
-## sklearn.linear_model.LogisticRegressionCV
+## sklearn.linear_model.LogisticRegressionCV???
 
 y_pred = logreg.predict(x_test)
 print(y_pred)
@@ -68,7 +64,6 @@ print("MSE: {}".format(mse))
 plt.scatter(x_test, y_test)
 plt.scatter(x_test, y_pred)
 
-plt.savefig("../imgs/inc_bach_pred_log.png")
+plt.savefig("../imgs/multivar_log_pred.png")
 
 plt.show()
-'''
