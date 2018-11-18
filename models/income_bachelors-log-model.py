@@ -42,7 +42,8 @@ x_train, x_test, y_train, y_test = train_test_split(norm_x, y,
 
 print("training data size: {}".format(len(x_train)))
 
-logreg = LogisticRegression(C=1e5, solver='lbfgs', multi_class='multinomial')
+logreg = LogisticRegression(C=1e5, solver='lbfgs', multi_class='multinomial',
+        n_jobs=-1)
 logreg.fit(x_train, y_train)
 
 ## sklearn.linear_model.LogisticRegressionCV
