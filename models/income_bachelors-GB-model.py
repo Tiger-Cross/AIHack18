@@ -18,8 +18,7 @@ data_folder = Path("../data/processed")
 
 # Set up x values
 inc_df = pd.read_csv(data_folder / "X19_INCOME.csv")
-inc_x_data = inc_df["PER CAPITA INCOME IN THE PAST 12 MONTHS (IN 2016
-        INFLATION-ADJUSTED DOLLARS): Total: Total population -- (Estimate)"]
+inc_x_data = inc_df["PER CAPITA INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS): Total: Total population -- (Estimate)"]
 
 # Set up y values
 edu_df = pd.read_csv(data_folder / "X15_EDUCATIONAL_ATTAINMENT.csv")
