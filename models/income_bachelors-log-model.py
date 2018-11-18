@@ -60,6 +60,6 @@ print("MSE: {}".format(mse))
 plt.scatter(x_test, y_test)
 plt.scatter(x_test, y_pred)
 
-plt.savefig("../imgs/inc_bach_pred_GB.png")
+plt.savefig("../imgs/inc_bach_pred_log.png")
 
 plt.show()
