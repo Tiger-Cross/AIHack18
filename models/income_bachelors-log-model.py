@@ -13,6 +13,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import mean_squared_error
+from sklearn.externals import joblib
 
 data_folder = Path("../data/processed")
 
@@ -46,6 +47,8 @@ logreg = LogisticRegression(C=1e5, solver='lbfgs', multi_class='multinomial',
         n_jobs=-1)
 logreg.fit(x_train, y_train)
 
+joblib.dump(logreg, "inc_bach_log_model.dat")
+
 ## sklearn.linear_model.LogisticRegressionCV
 
 y_pred = logreg.predict(x_test)
@@ -53,3 +56,10 @@ print(y_pred)
 
 mse = mean_squared_error(y_test, y_pred)
 print("MSE: {}".format(mse))
+
+plt.scatter(x_test, y_test)
+plt.scatter(x_test, y_pred)
+
+plt.savefig("../imgs/inc_bach_pred_GB.png")
+
+plt.show()

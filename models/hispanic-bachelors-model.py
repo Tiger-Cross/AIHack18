@@ -13,6 +13,7 @@ from xgboost import XGBClassifier
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
+from sklearn.externals import joblib
 
 data_folder = Path("../data/processed")
 
@@ -42,11 +43,20 @@ x_train, x_test, y_train, y_test = train_test_split(norm_x, y,
 
 print("training data size: {}".format(len(x_train)))
 
+# Generate, fit and save model
 model = XGBClassifier(n_jobs=-1, verbose_eval=True)
 model.fit(x_train, y_train, verbose=True)
+joblib.dump(model, "hisp_bach_model.dat")
 
 y_pred = model.predict(x_test)
 print(y_pred)
 
 mse = mean_squared_error(y_test, y_pred)
 print("MSE: {}".format(mse))
+
+plt.scatter(x_test, y_test)
+plt.scatter(x_test, y_pred)
+
+plt.savefig("../imgs/hist_bach_pred.png")
+
+plt.show()
