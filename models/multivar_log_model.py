@@ -33,9 +33,13 @@ edu_y_data = edu_df["SEX BY AGE BY FIELD OF BACHELOR'S DEGREE FOR FIRST MAJOR FO
 xs_df = pd.concat(xs, axis=1)
 xs_df.columns = ["Income", "Food Stamps", "Hispanic", "Health Insurance", "Household"]
 
+print(np.shape(edu_y_data))
+print(np.shape(xs_df))
+
 # Shrink and normalise x values
 for col in xs_df:
     col = col[:]
+
 y_small = edu_y_data[:]
 scaler = MinMaxScaler()
 norm_x = scaler.fit_transform(xs_df.values.reshape(-1, 1))
