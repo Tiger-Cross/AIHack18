@@ -24,12 +24,6 @@ top_correlations = []
 min_correlations = []
 bottom_correlations = []
 
-# for df in dfs:
-#     df = df[~df['Unnamed: 0'].str.contains('Margin of Error')]
-#     top_correlations.append(df[0:plots_per_df])
-#     bottom_correlations.append(df[-3:])
-#     min_correlations.append(df.sort_values('abs_correlation', ascending = False)[-3:])
-
 for df in dfs:
     df = df[df['Unnamed: 0'].str.contains('Estimate')]
     df = df.dropna()
@@ -144,7 +138,6 @@ for i in range(len(sorted_top_values))[0::3]:
 
     plt.barh(x[i:i+3], sorted_top_values[i:i+3], label = sorted_top_labels[i:i+3])
 plt.yticks(x, sorted_top_labels)
-#plt.savefig("hooray.png")
 plt.show()
 
 
